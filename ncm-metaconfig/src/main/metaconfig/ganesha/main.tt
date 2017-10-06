@@ -1,0 +1,2 @@
+[% # legacy version defaults to 1.5/main
+  INCLUDE "metaconfig/ganesha/1.5/main.tt" %]

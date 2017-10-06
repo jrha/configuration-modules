@@ -1,0 +1,83 @@
+# ${license-info}
+# ${developer-info}
+# ${author-info}
+# ${build-info}
+
+=head1 NAME
+
+ncm-${project.artifactId}: Component for running puppet standalone within quattor
+
+=head1 RESOURCES
+
+=over
+
+=item * C<< /software/components/${project.artifactId}/puppetconf >>
+
+Defines the configuration for quattor. Each item is a section of the C<< /etc/puppet/puppet.conf >> file.
+The section C<< [main] >> is mandatory. Other sections may be added.
+
+=item * C<< /software/components/${project.artifactId}/puppetconf/main >>
+
+Each item is a parameter in the C<< [main] >> section of the puppet.conf file. 
+The mandatory parameters are:
+
+=over 4
+
+=item * C<logdir> : 
+
+Puppet log dir. Defaults to C<< /var/log/puppet >>.
+
+=item * C<rundir> : string
+
+Puppet run dir. Defaults to C<< /var/log/puppet >>.
+
+=back
+
+=item * C<< /software/components/${project.artifactId}/hieraconf >>
+
+Defines the configuration for hiera. Each item is a key definition in the C<< /etc/puppet/hiera.yaml >> file. 
+The default is: 
+
+    ---
+    :backends:
+    - yaml
+    :hierarchy:
+    - quattor
+    :yaml:
+          :datadir: /etc/puppet/hieradata
+
+=item * C<< /software/components/${project.artifactId}/nodefiles >>
+
+Named list of node specific manifests. The component will run C<< puppet --apply /etc/puppet/manifests/<file> >>
+for each item <file> of the nlist. The parameters of each item are:
+
+=over 4
+
+=item * C<contents> : string
+
+content of the file:
+
+The default for "nodefiles" is one file C<< quattor_default.pp >> with content C<< "hiera_include('classes')" >>.
+
+=back
+
+=item * C<< /software/components/${project.artifactId}/hieradata >>
+
+Data to be passed to the hiera config. The data will be written in 
+C<< /etc/puppet/hieradata/quattor.yaml >>. Note: the nlist keys will be unescaped by the component.
+
+=item * C<< /software/components/${project.artifactId}/modules >>
+
+Named list of modules to be downloaded from the puppetlab forge. Each module has the following parameters:
+
+=over 4
+
+=item * C<version> ? string
+
+version of the module.
+
+=back 
+
+=back
+
+=cut

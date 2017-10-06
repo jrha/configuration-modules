@@ -1,0 +1,42 @@
+# Basic Yum repository file. See the man pages for
+# NCM::Component::${project.artifactId} and yum.conf
+# for more details.
+
+[[% name %]]
+name=[% name %]
+baseurl=
+[%- FOREACH repo IN protocols -%]
+[%-     FILTER indent -%]
+[%            repo.url %]
+[%      END -%]
+[%- END -%]
+[%- FOREACH repo IN protocols -%]
+[%-     FOREACH sslopt IN ['cacert', 'clientkey', 'clientcert', 'verify'] -%]
+[%-         IF repo.exists(sslopt) -%]
+ssl[%           sslopt %]=[% repo.$sslopt %]
+[%         END -%]
+[%-     END %]
+[%- END %]
+metadata_expire=[% metadata_expire.defined ? metadata_expire : '7d' %]
+include=[% repos_dir ? repos_dir : "/etc/yum.repos.d" %]/[% name %].pkgs
+[% IF excludepkgs.defined -%]
+exclude=[% excludepkgs.join(' ') %]
+[% END -%]
+[%- IF proxy.defined && proxy != '' -%]
+proxy=[% proxy %]
+[% END -%]
+[%- FOREACH opt IN ['enabled', 'gpgcheck', 'priority',
+                    'includepkgs', 'skip_if_unavailable',
+                    'repo_gpgcheck', 'gpgcakey'] -%]
+[%-     IF ${opt}.defined -%]
+[%          opt %]=[% CCM.is_list($opt) ? ${opt}.join(' ') : $opt %]
+[%     END -%]
+[%- END -%]
+[% IF gpgkey.defined -%]
+gpgkey=
+[%- FOREACH key IN gpgkey -%]
+[%-     FILTER indent -%]
+[%            key %]
+[%      END -%]
+[%- END -%]
+[% END %]

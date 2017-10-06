@@ -1,0 +1,25 @@
+# ${license-info}
+# ${developer-info}
+# ${author-info}
+
+
+=head1 NAME
+
+NCM::ipmi - Components used to manage IPMI configuration
+
+=head1 RESOURCES
+
+=over
+
+=item * C<< /software/components/ipmi/active >> : boolean
+
+Activates/deactivates the component.
+
+=back
+
+=head1 FILES
+
+This component doesn't touch any file.
+
+=cut
+

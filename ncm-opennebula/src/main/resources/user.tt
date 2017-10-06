@@ -1,0 +1,16 @@
+[% FOR pool IN user.pairs -%]
+[%     FOR pair IN pool.value.pairs %]
+[%-        SWITCH pair.key -%]
+[%             CASE 'ssh_public_key' -%]
+[%                 pair.key FILTER upper %] = "
+[%-                 FOREACH item IN pair.value -%]
+[%                      item %]
+[%                  END -%]"
+[%             CASE 'labels' -%]
+[%                 pair.key FILTER upper %] = "[% pair.value.join(',') %]"
+[%         END -%]
+[%-    END -%]
+[%     IF pool.key != 'oneadmin' -%]
+QUATTOR = 1
+[%     END -%]
+[% END -%]

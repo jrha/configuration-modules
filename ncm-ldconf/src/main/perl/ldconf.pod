@@ -1,0 +1,32 @@
+# ${license-info}
+# ${developer-info}
+# ${author-info}
+
+
+=head1 NAME
+
+ldconf: NCM component to manage C<< /etc/ld.so.conf >> file.
+
+=head1 DESCRIPTION
+
+The I<ldconf> component manages the C<< /etc/ld.so.conf >> file.  This
+component can only ensure that listed directories exist in the
+C<< /etc/ls.so.conf file >>. It cannot remove entries previously added by
+this component.
+
+=head1 RESOURCES
+
+=over
+
+=item * C<< /software/components/ldconf/conffile >>
+
+The configuration file to manage.  Should be set to C<< /etc/ld.so.conf >>
+unless your doing something unusual. 
+
+=item * C<< /software/components/ldconf/paths >>
+
+List of paths to ensure are in the C<< ld.so.conf >> configuration file. 
+
+=back
+
+=cut

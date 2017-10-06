@@ -1,0 +1,27 @@
+[%- digits = ['port', 'debug_level', 'zone_id', 'cpu_cost', 'memory_cost', 'disk_cost', 'start'] -%]
+[%- booleans = ['shared', 'persistent_only', 'keep_snapshots', 'ds_migrate', 'public'] -%]
+[%- comma_list_attrs = ['imported_vms_actions', 'required_attrs', 'app_actions'] -%]
+[
+[% FILTER indent -%]
+[%     IF name.defined -%]
+name = "[% name %]",
+[%     END %]
+[%-    IF type.defined -%]
+type = "[% type %]",
+[%     END %]
+[%-    FOR pair IN data.pairs -%]
+[%        pair.key %] =
+[%-        SWITCH pair.key -%]
+[%-            CASE digits -%]
+ [%                pair.value %]
+[%-            CASE booleans -%]
+ "[%               pair.value ? "yes" : "no" %]"
+[%-            CASE comma_list_attrs -%]
+ "[%            pair.value.join(', ') -%]"
+[%-            CASE -%]
+ "[%               pair.value %]"
+[%-        END %]
+[%-       data.pairs.last.key == pair.key ? "" : "," %]
+[%        END -%]
+[%-    END -%]
+]

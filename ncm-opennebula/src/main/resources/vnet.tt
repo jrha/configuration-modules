@@ -1,0 +1,20 @@
+[%- booleans = ['vlan', 'context_force_ipv4', 'filter_ip_spoofing', 'filter_mac_spoofing'] -%]
+[%- ar_section = ['ar'] -%]
+[% FOR pool IN vnet.pairs -%]
+NAME = "[% pool.key %]"
+[%    FOR pair IN pool.value.pairs %]
+[%-       SWITCH pair.key -%]
+[%            CASE booleans -%]
+[%                pair.key FILTER upper %] = "[% pair.value ? "YES" : "NO" %]"
+[%            CASE ar_section -%]
+[%                pair.key FILTER upper %] = [% INCLUDE 'opennebula/oned_level1.tt' 
+                                      data=pair.value -%]
+[%            CASE 'labels' -%]
+[%                pair.key FILTER upper %] = "[% pair.value.join(',') %]"
+[%            CASE 'permissions' -%]
+[%            CASE -%]
+[%                pair.key FILTER upper %] = "[% pair.value %]"
+[%        END -%]
+[%-    END %]
+[%- END -%]
+QUATTOR = 1

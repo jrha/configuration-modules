@@ -1,0 +1,13 @@
+[% FOR pool IN group.pairs -%]
+[%     FOR pair IN pool.value.pairs %]
+[%-        SWITCH pair.key -%]
+[%             CASE 'description' -%]
+[%                 pair.key FILTER upper %] = "[% pair.value %]"
+[%             CASE 'labels' -%]
+[%                 pair.key FILTER upper %] = "[% pair.value.join(',') %]"
+[%         END -%]
+[%     END -%]
+[%     IF pool.key != 'oneadmin' -%]
+QUATTOR = 1
+[%     END -%]
+[% END -%]
