@@ -2,12 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.quattor</groupId>
-  <artifactId>configuration-modules-core</artifactId>
+  <artifactId>configuration-modules</artifactId>
   <packaging>pom</packaging>
   <version>17.8.0-rc2-SNAPSHOT</version>
   <name>Node Configuration Manager - components</name>
-  <description>Modules configuring different services or portions of
-  a Linux system</description>
+  <description>Modules for configuring different applications or services on a host</description>
   <parent>
     <groupId>org.sonatype.oss</groupId>
     <artifactId>oss-parent</artifactId>
@@ -26,9 +25,9 @@
     </snapshotRepository>
   </distributionManagement>
   <scm>
-    <connection>scm:git:git://github.com/quattor/configuration-modules-git.git</connection>
-    <developerConnection>scm:git:git@github.com:quattor/configuration-modules-core.git</developerConnection>
-    <url>https://github.com/quattor/configuration-modules-core</url>
+    <connection>scm:git:git://github.com/quattor/configuration-modules.git</connection>
+    <developerConnection>scm:git:git@github.com:quattor/configuration-modules.git</developerConnection>
+    <url>https://github.com/quattor/configuration-modules</url>
   </scm>
   <modules>
     <module>ncm-accounts</module>
@@ -101,20 +100,45 @@
     <module>ncm-systemd</module>
     <module>ncm-freeipa</module>
     <module>ncm-path</module>
+    <module>ncm-condorconfig</module>
+    <module>ncm-dcache</module>
+    <module>ncm-dpmlfc</module>
+    <module>ncm-gacl</module>
+    <module>ncm-gip2</module>
+    <module>ncm-glitestartup</module>
+    <module>ncm-globuscfg</module>
+    <module>ncm-gridmapdir</module>
+    <module>ncm-gsissh</module>
+    <module>ncm-lbconfig</module>
+    <module>ncm-lcas</module>
+    <module>ncm-lcgbdii</module>
+    <module>ncm-lcgmonjob</module>
+    <module>ncm-lcmaps</module>
+    <module>ncm-maui</module>
+    <module>ncm-mkgridmap</module>
+    <module>ncm-myproxy</module>
+    <module>ncm-pbsclient</module>
+    <module>ncm-pbsknownhosts</module>
+    <module>ncm-pbsserver</module>
+    <module>ncm-vomsclient</module>
+    <module>ncm-wlconfig</module>
+    <module>ncm-wmsclient</module>
+    <module>ncm-wmslb</module>
+    <module>ncm-xrootd</module>
   </modules>
   <build>
     <pluginManagement>
       <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>2.1</version>
-          <configuration>
-            <mavenExecutorId>forked-path</mavenExecutorId>
-            <useReleaseProfile>false</useReleaseProfile>
-            <arguments>-Psonatype-oss-release -Dgpg.useagent=true</arguments>
-          </configuration>
-        </plugin>
+      	<plugin>
+      	  <groupId>org.apache.maven.plugins</groupId>
+      	  <artifactId>maven-release-plugin</artifactId>
+      	  <version>2.1</version>
+      	  <configuration>
+      	    <mavenExecutorId>forked-path</mavenExecutorId>
+      	    <useReleaseProfile>false</useReleaseProfile>
+      	    <arguments>-Psonatype-oss-release -Dgpg.useagent=true</arguments>
+      	  </configuration>
+      	</plugin>
       </plugins>
     </pluginManagement>
   </build>
